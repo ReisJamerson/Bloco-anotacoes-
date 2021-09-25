@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React from 'react'
+import image from './Img/Persons.svg'
 import './App.css';
 
 function App() {
+ 
+  const [comment, setcomment] = React.useState()
+  const [Allcomment, setAllcomment] = React.useState([])
+
+  function WhriteTextArea(EventtoTextArea){
+    setcomment(EventtoTextArea.target.value)
+  }
+
+  function ClickButton(){
+    const Lastcomment = [ ... Allcomment,comment]
+    setAllcomment(Lastcomment)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+     <img src={image} alt='imagem-pessoas' />
+     <textarea onChange={WhriteTextArea}></textarea>
+     <button onClick={ClickButton}>Comentar</button>
+
+
+    <ul>
+      {Allcomment.map(comments => (
+        <li key={comments}>{comments}</li>
+      ))}   
+    </ul>
     </div>
   );
 }
